@@ -44,3 +44,4 @@ def download_product(request, pk):
       'downloads': product.downloads
     }
   })
+

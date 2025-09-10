@@ -121,9 +121,9 @@ USE_TZ = True
 STATIC_URL = 'static/'
 
 # This tells Django where to look for static files during development
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',  # This points to a 'static' folder in your project root
-]
+# STATICFILES_DIRS = [
+#     BASE_DIR / 'static',  # This points to a 'static' folder in your project root
+# ]
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = BASE_DIR / 'media'

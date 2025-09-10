@@ -24,3 +24,5 @@ class ProductAdmin(admin.ModelAdmin):
         "fields": ('downloads',)
       })
   )
+
+
