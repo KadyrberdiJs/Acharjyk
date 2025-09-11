@@ -13,12 +13,12 @@ class ProductAdmin(admin.ModelAdmin):
   prepopulated_fields = {'slug': ('name',)}
   list_display = ('name', 'category', 'downloads', 'created_at')
   list_filter = ('category',)
-  search_fields = ('name', 'category',)
+  search_fields = ('name', 'creater', 'category',)
   readonly_fields = ('downloads',)
 
   fieldsets = (
       ('Achar information', {
-          "fields": ('name', 'slug', 'category', 'file',),
+          "fields": ('name', 'slug', 'creater', 'category', 'file',),
       }),
       ('Details', {
         "fields": ('downloads',)

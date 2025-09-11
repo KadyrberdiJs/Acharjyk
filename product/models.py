@@ -3,7 +3,7 @@ from django.db import models
 class Category(models.Model):
    name = models.CharField(max_length=200, unique=True, verbose_name='Имя')
    slug = models.SlugField(max_length=200, unique=True, verbose_name='URL')
-   image = models.ImageField(upload_to='product_images', verbose_name='Изображения')
+   image = models.ImageField(upload_to='category_images', verbose_name='Изображения')
 
 
    class Meta:
@@ -17,6 +17,7 @@ class Category(models.Model):
 class Product(models.Model):
   name = models.CharField(max_length=200, unique=True, verbose_name='Имя')
   slug = models.SlugField(max_length=200, unique=True, verbose_name='URL')
+  creater = models.CharField(max_length=200, verbose_name='Создатель')
   category = models.ForeignKey(to=Category, on_delete=models.CASCADE, related_name='products',
                                verbose_name='Категория')
   file = models.FileField(upload_to='product-files/')
