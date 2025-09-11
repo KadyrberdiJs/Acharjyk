@@ -23,7 +23,7 @@ class BannerAdmin(admin.ModelAdmin):
 
 
 @admin.register(Sellers)
-class BannerAdmin(admin.ModelAdmin):
+class SellerAdmin(admin.ModelAdmin):
   list_display = ('name', 'short_description', 'price', 'created_at',)
   search_fields = ('name', 'description',)
   readonly_fields = ('created_at',)
