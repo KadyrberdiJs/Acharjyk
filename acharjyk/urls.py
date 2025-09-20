@@ -20,6 +20,20 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
-    path('product/', include('product.urls', namespace='product')),
+    path('api/product/', include('product.urls', namespace='product')),
     # path('users/', include('users.urls', namespace='users')),
 ]
+
+
+# Banner api Endpoint
+# http://127.0.0.1:8000/api/banner
+
+# Sellers api Endpoint
+# http://127.0.0.1:8000/api/sellers
+
+# Products api Endpoint
+# http://127.0.0.1:8000/api/product/
+
+# Category api Endpoint
+# http://127.0.0.1:8000/api/product/category
+

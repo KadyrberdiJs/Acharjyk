@@ -5,10 +5,23 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 
 
-from product.models import Product
+from product.models import Category, Product
 
-# def product_list(request):
-#   return render(request, "products/product_list.html")
+
+@require_GET
+def category(request):
+  category = Category.objects.all()
+  data = [
+    {
+      "id": c.id,
+      "name": c.name,
+      "image": c.image.url if c.image else None
+    }
+    for c in category
+  ]
+
+  return JsonResponse({'category': data})
+
 
 @require_GET
 def product(request):
