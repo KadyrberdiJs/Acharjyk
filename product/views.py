@@ -50,7 +50,7 @@ def product(request):
 
 @require_POST
 def download_product(request, pk):
-  product = get_object_or_404(Product, pk)
+  product = get_object_or_404(Product, pk=pk)
 
   # Increase download count 
   product.downloads += 1
@@ -60,7 +60,7 @@ def download_product(request, pk):
     'success': True,
 
     'data': {
-      "file_url": request.build_absolute_url(product.file.url),
+      "file_url": request.build_absolute_uri(product.file.url),
       'downloads': product.downloads
     }
   })
