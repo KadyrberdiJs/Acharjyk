@@ -1,41 +1,41 @@
+from re import S
 from django.http import JsonResponse
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
+from rest_framework import generics, status
+from rest_framework.response import Response
 
 from main.models import Banner, Sellers
+from main.serializer import BannerSerializer, SellersSerializer
 
 
-@require_GET
-def banner(request):
-  banners = Banner.objects.all()
-  data = [
-    {
-      "id": banner.id,
-      "title": banner.title,
-      "description": banner.description,
-      "image": banner.image.url if banner.image else None,
-    }
-    for banner in banners
-  ]
+# Banner 
+class BannerList(generics.ListCreateAPIView):
+    queryset = Banner.objects.all()
+    serializer_class = BannerSerializer
 
-  return JsonResponse({'banner': data}, safe=False)
+    def delete(self, request, *args, **kwargs):
+        Banner.objects.all().delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
 
+class BannerRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Banner.objects.all()
+    serializer_class = BannerSerializer
+    lookup_field = 'pk'
 
-@require_GET
-def sellers(request):
-  seller = Sellers.objects.all()
+    def get_serializer_context(self):
+        return {'request': self.request}
+    
 
-  data = [
-    {
-      'id': s.id,
-      'name': s.name,
-      'description': s.description,
-      'contacts': s.contacts,
-      'price': s.price,
-      'logo': s.logo.url if s.logo else None,
-    }
-    for s in seller
-  ]
+# Seller 
 
-  return JsonResponse({'seller': data}, safe=False)
+class SellerList(generics.ListCreateAPIView):
+    queryset = Sellers.objects.all()
+    serializer_class = SellersSerializer
+    
+    def get_serializer_context(self):
+        return {'request': self.request}

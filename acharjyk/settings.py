@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "corsheaders",
+    'rest_framework',
 
     'main',
     'product',
@@ -131,7 +132,7 @@ STATIC_URL = 'static/'
 #     BASE_DIR / 'static',  # This points to a 'static' folder in your project root
 # ]
 
-MEDIA_URL = 'media/'
+MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 # This is where Django will collect all static files for production
