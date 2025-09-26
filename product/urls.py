@@ -5,8 +5,8 @@ app_name = 'product'
 
 urlpatterns = [
   # API's
-  path("", views.product, name="product_api"),
-  path("category", views.category, name="category_api"),
+  path("", views.ProductList.as_view(), name="product_api"),
+  path("category", views.CategoryList.as_view(), name="category_api"),
   path('<int:pk>/download/', views.download_product, name='download_product')
 ] 
 
