@@ -18,7 +18,7 @@ class ProductAdmin(admin.ModelAdmin):
 
   fieldsets = (
       ('Achar information', {
-          "fields": ('name', 'slug', 'creater', 'category', 'file',),
+          "fields": ('name', 'slug', 'creater', 'category', 'price', 'file',),
       }),
       ('Details', {
         "fields": ('downloads',)

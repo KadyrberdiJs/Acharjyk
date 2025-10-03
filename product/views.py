@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from rest_framework import generics, status
+from django.middleware.csrf import get_token
 
 
 from product.models import Category, Product
@@ -25,6 +26,8 @@ class ProductList(generics.ListCreateAPIView):
     def get_serializer_context(self):
         return {'request': self.request}
 
+def get_csrf_token(request):
+    return JsonResponse({'csrfToken': get_token(request)})
 
 @require_POST
 def  download_product(request, pk):

@@ -60,7 +60,10 @@ MIDDLEWARE = [
 REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']}
 
 # Allow React dev server
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",  # Add your frontend origin
+    "http://127.0.0.1:5173",  # Optionally add this for consistency
+]
 
 ROOT_URLCONF = 'acharjyk.urls'
 
