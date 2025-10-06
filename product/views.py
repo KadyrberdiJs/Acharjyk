@@ -5,6 +5,8 @@ from django.shortcuts import get_object_or_404
 from django.views.decorators.http import require_GET, require_POST
 from rest_framework import generics, status
 from django.middleware.csrf import get_token
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 
 
 from product.models import Category, Product
@@ -29,19 +31,22 @@ class ProductList(generics.ListCreateAPIView):
 def get_csrf_token(request):
     return JsonResponse({'csrfToken': get_token(request)})
 
-@require_POST
-def  download_product(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    product.downloads += 1
-    product.save()
-
-    return JsonResponse({
-        'success': True,
-        'data': {
-            'file_url': request.build_absolute_uri(product.file.url),
-            'downloads': product.downloads
-        }
-    })
+@api_view(['POST'])
+def increment_download(request, pk):
+    try:
+        product = Product.objects.get(pk=pk)
+        product.downloads += 1
+        product.save()
+        return Response({
+            "success": True,
+            "data": {
+                "id": product.id,
+                "downloads": product.downloads,
+                "file_url": product.file.url if product.file else None
+            }
+        }, status=status.HTTP_200_OK)
+    except Product.DoesNotExist:
+        return Response({"success": False, "error": "Product not found"}, status=status.HTTP_404_NOT_FOUND)
 
 
 

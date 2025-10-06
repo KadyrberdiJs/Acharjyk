@@ -22,7 +22,6 @@ class Product(models.Model):
                                verbose_name='Категория')
   file = models.FileField(upload_to='product-files/')
   downloads = models.PositiveBigIntegerField(default=0)
-  price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True, verbose_name='Цена')
   created_at = models.DateTimeField(auto_now_add=True)
 
   class Meta:
